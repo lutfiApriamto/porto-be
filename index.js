@@ -16,7 +16,7 @@ app.use(cors({
   credentials: true,
 }));
 
-app.options('/(.*)', cors());
+app.options('/{/*path}', cors());
 
 app.use(express.json());
 app.use(cookieParser());
