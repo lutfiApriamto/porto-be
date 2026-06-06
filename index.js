@@ -10,7 +10,7 @@ const app = express();
 dotenv.config({ path: "./config/.env" });
 
 app.use(cors({
-  origin: process.env.CLIENT_URL,
+  origin: process.env.CLIENT_URL || "https://lutfi-portfolio-two.vercel.app",
   methods: ["GET", "POST", "PATCH", "DELETE"],
   allowedHeaders: ["Content-Type", "Authorization"],
   credentials: true,
@@ -26,6 +26,16 @@ app.use('/api/contact', contactRoute);
 app.get('/api/health', (req, res) => {
   res.status(200).json({ status: 'ok', message: 'Server is running.' });
 });
+
+const connectDB = async () => {
+  if (!process.env.MONGO_URI) return;
+  try {
+    await mongoose.connect(process.env.MONGO_URI);
+    console.log('✅ MongoDB connected');
+  } catch (err) {
+    console.error('❌ MongoDB connection error:', err.message);
+  }
+};
 
 const PORT = process.env.PORT || 5000;
 
