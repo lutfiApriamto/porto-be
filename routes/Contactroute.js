@@ -445,14 +445,14 @@ router.post('/', async (req, res) => {
     await transporter.sendMail({
       from: `"Lutfi Apriamto" <${process.env.EMAIL_USER}>`,
       to: email,
-      subject: `✅ Got your message — ${subject}`,
+      subject: `Got your message — ${subject}`,
       html: getUserEmailTemplate({ name, subject, message }),
     });
 
     await transporter.sendMail({
       from: `"Portfolio Contact" <${process.env.EMAIL_USER}>`,
       to: process.env.EMAIL_USER,
-      subject: `📩 New message from ${name} — ${subject}`,
+      subject: `New message from ${name} — ${subject}`,
       html: getOwnerEmailTemplate({ name, email, subject, message }),
     });
 
